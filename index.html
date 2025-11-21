@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Certificate Lookup</title>
     <style>
         /* General Page Layout */
@@ -14,28 +14,28 @@
             align-items: flex-start;
             min-height: 100vh;
             margin: 0;
-            padding-top: 50px;
+            padding-top: 30px; /* Adjusted top spacing for mobile look */
             overflow: hidden; /* SCROLL DISABLED */
         }
 
         /* The Main Card Container */
         .card {
             background-color: #ffffff;
-            width: 100%;
-            max-width: 900px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            border-radius: 4px;
-            padding: 30px;
-            margin: 0 20px;
+            width: 90%; /* Responsive width */
+            max-width: 800px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 15px;
+            margin: 0 auto;
             border: 1px solid #eaeaea;
         }
 
         /* Header Styling */
         .card h2 {
             text-align: center;
-            margin-top: 0;
-            margin-bottom: 25px;
-            font-size: 24px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            font-size: 20px;
             color: #000;
             font-weight: bold;
         }
@@ -45,22 +45,24 @@
             width: 100%;
             border-collapse: collapse;
             border: 1px solid #dee2e6;
+            table-layout: fixed; /* Ensures columns respect width percentages */
         }
 
         .cert-table td {
-            padding: 12px 15px;
+            padding: 10px 10px;
             border: 1px solid #dee2e6;
-            font-size: 15px;
+            font-size: 13px; /* Matches mobile screenshot size */
             vertical-align: middle;
+            word-wrap: break-word; /* Ensures long addresses wrap properly */
+            line-height: 1.4;
         }
 
         /* Left Column (Labels) Styling */
         .cert-table .label-col {
-            background-color: #007bff; /* Bright Blue */
+            background-color: #007bff; /* The Bright Blue from screenshot */
             color: #ffffff;
             font-weight: bold;
-            width: 25%;
-            min-width: 150px;
+            width: 30%; /* Fixed percentage to force side-by-side layout */
         }
 
         /* Right Column (Values) Styling */
@@ -69,17 +71,21 @@
             color: #000000;
             text-transform: uppercase;
             font-weight: 400;
+            width: 70%;
         }
 
-        /* Mobile Responsiveness */
-        @media (max-width: 600px) {
+        /* Mobile Specific Adjustments */
+        @media (max-width: 400px) {
+            .card {
+                width: 92%;
+                padding: 10px;
+            }
             .cert-table td {
-                display: block;
-                width: 100%;
-                box-sizing: border-box;
+                font-size: 12px; /* Slightly smaller text for very small screens */
+                padding: 8px 6px;
             }
             .cert-table .label-col {
-                width: 100%;
+                width: 32%; /* Slight adjustment for readability */
             }
         }
     </style>
@@ -94,7 +100,7 @@
     </div>
 
 <script>
-    // Database with ID 24
+    // Database with ID 24 (Harshada Suklal Wagh)
     const database = {
         "24": {
             institute: "DISHA COMPUTER INSTITUTE",
@@ -102,7 +108,7 @@
             studentName: "HARSHADA SUKLAL WAGH",
             branch: "IN FRONT OF JAIHIND SENIOR COLLEGE BEHIND RAJHANS HOTEL DEOPUR DHULE",
             courseName: "CERTIFICATE COURSE IN AUTOCAD",
-            courseContent: "AUTOCAD 2D, AUTOCAD 3D",
+            courseContent: "AUTOCAD 2D,AUTOCAD 3D",
             percentage: "88%",
             dateOfIssue: "2025-08-25"
         }
