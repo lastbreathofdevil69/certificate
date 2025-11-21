@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Lookup</title>
+    <style>
+        /* General Page Layout */
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: #fcfcfc;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding-top: 50px;
+            overflow: hidden; /* SCROLL DISABLED */
+        }
+
+        /* The Main Card Container */
+        .card {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 900px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 4px;
+            padding: 30px;
+            margin: 0 20px;
+            border: 1px solid #eaeaea;
+        }
+
+        /* Header Styling */
+        .card h2 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 24px;
+            color: #000;
+            font-weight: bold;
+        }
+
+        /* Table Styling */
+        .cert-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #dee2e6;
+        }
+
+        .cert-table td {
+            padding: 12px 15px;
+            border: 1px solid #dee2e6;
+            font-size: 15px;
+            vertical-align: middle;
+        }
+
+        /* Left Column (Labels) Styling */
+        .cert-table .label-col {
+            background-color: #007bff; /* Bright Blue */
+            color: #ffffff;
+            font-weight: bold;
+            width: 25%;
+            min-width: 150px;
+        }
+
+        /* Right Column (Values) Styling */
+        .cert-table .value-col {
+            background-color: #ffffff;
+            color: #000000;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .cert-table td {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .cert-table .label-col {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Certificate Lookup</h2>
+        <table class="cert-table" id="certificateTable">
+            <!-- Content will be injected here by JavaScript -->
+        </table>
+    </div>
+
+<script>
+    // Database with ID 24
+    const database = {
+        "24": {
+            institute: "DISHA COMPUTER INSTITUTE",
+            certNo: "24", 
+            studentName: "HARSHADA SUKLAL WAGH",
+            branch: "IN FRONT OF JAIHIND SENIOR COLLEGE BEHIND RAJHANS HOTEL DEOPUR DHULE",
+            courseName: "CERTIFICATE COURSE IN AUTOCAD",
+            courseContent: "AUTOCAD 2D, AUTOCAD 3D",
+            percentage: "88%",
+            dateOfIssue: "2025-08-25"
+        }
+    };
+
+    // Function to get 'id' from URL
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    // Function to Render the Table
+    function renderTable(data) {
+        const table = document.getElementById('certificateTable');
+        
+        const createRow = (label, value) => {
+            return `
+                <tr>
+                    <td class="label-col">${label}</td>
+                    <td class="value-col">${value}</td>
+                </tr>
+            `;
+        };
+
+        if (data) {
+            table.innerHTML = `
+                ${createRow("Institute", data.institute)}
+                ${createRow("Certificate No.", data.certNo)}
+                ${createRow("Student Name", data.studentName)}
+                ${createRow("Branch", data.branch)}
+                ${createRow("Course Name", data.courseName)}
+                ${createRow("Course Content", data.courseContent)}
+                ${createRow("Percentage", data.percentage)}
+                ${createRow("Date of Issue", data.dateOfIssue)}
+            `;
+        } else {
+            table.innerHTML = `<tr><td colspan="2" style="text-align:center; color: red; padding: 20px;">Record Not Found</td></tr>`;
+        }
+    }
+
+    // Logic to run on load
+    window.onload = function() {
+        let id = getQueryParam('id');
+        
+        // Default to 24 if no ID provided
+        if (!id) {
+            id = "24";
+            const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?id=24';
+            window.history.pushState({path: newUrl}, '', newUrl);
+        }
+
+        renderTable(database[id]);
+    };
+</script>
+
+</body>
+</html>
