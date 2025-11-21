@@ -14,14 +14,14 @@
             align-items: flex-start;
             min-height: 100vh;
             margin: 0;
-            padding-top: 30px; /* Adjusted top spacing for mobile look */
+            padding-top: 30px;
             overflow: hidden; /* SCROLL DISABLED */
         }
 
         /* The Main Card Container */
         .card {
             background-color: #ffffff;
-            width: 90%; /* Responsive width */
+            width: 90%;
             max-width: 800px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
@@ -45,24 +45,24 @@
             width: 100%;
             border-collapse: collapse;
             border: 1px solid #dee2e6;
-            table-layout: fixed; /* Ensures columns respect width percentages */
+            table-layout: fixed;
         }
 
         .cert-table td {
             padding: 10px 10px;
             border: 1px solid #dee2e6;
-            font-size: 13px; /* Matches mobile screenshot size */
+            font-size: 13px;
             vertical-align: middle;
-            word-wrap: break-word; /* Ensures long addresses wrap properly */
+            word-wrap: break-word;
             line-height: 1.4;
         }
 
         /* Left Column (Labels) Styling */
         .cert-table .label-col {
-            background-color: #007bff; /* The Bright Blue from screenshot */
+            background-color: #007bff; /* Bright Blue */
             color: #ffffff;
             font-weight: bold;
-            width: 30%; /* Fixed percentage to force side-by-side layout */
+            width: 30%;
         }
 
         /* Right Column (Values) Styling */
@@ -81,11 +81,11 @@
                 padding: 10px;
             }
             .cert-table td {
-                font-size: 12px; /* Slightly smaller text for very small screens */
+                font-size: 12px;
                 padding: 8px 6px;
             }
             .cert-table .label-col {
-                width: 32%; /* Slight adjustment for readability */
+                width: 32%;
             }
         }
     </style>
@@ -100,12 +100,22 @@
     </div>
 
 <script>
-    // Database with ID 24 (Harshada Suklal Wagh)
+    // Database
     const database = {
-        "24": {
+        "8124": {
             institute: "DISHA COMPUTER INSTITUTE",
-            certNo: "24", 
+            certNo: "8124", 
             studentName: "HARSHADA SUKLAL WAGH",
+            branch: "IN FRONT OF JAIHIND SENIOR COLLEGE BEHIND RAJHANS HOTEL DEOPUR DHULE",
+            courseName: "CERTIFICATE COURSE IN AUTOCAD",
+            courseContent: "AUTOCAD 2D,AUTOCAD 3D",
+            percentage: "88%",
+            dateOfIssue: "2025-08-25"
+        },
+        "8125": {
+            institute: "DISHA COMPUTER INSTITUTE",
+            certNo: "8125", 
+            studentName: "SHIVAM MAHENDRA GAUR",
             branch: "IN FRONT OF JAIHIND SENIOR COLLEGE BEHIND RAJHANS HOTEL DEOPUR DHULE",
             courseName: "CERTIFICATE COURSE IN AUTOCAD",
             courseContent: "AUTOCAD 2D,AUTOCAD 3D",
@@ -145,6 +155,7 @@
                 ${createRow("Date of Issue", data.dateOfIssue)}
             `;
         } else {
+            // Displays this if ID is missing or not in database
             table.innerHTML = `<tr><td colspan="2" style="text-align:center; color: red; padding: 20px;">Record Not Found</td></tr>`;
         }
     }
@@ -153,14 +164,12 @@
     window.onload = function() {
         let id = getQueryParam('id');
         
-        // Default to 24 if no ID provided
-        if (!id) {
-            id = "24";
-            const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?id=24';
-            window.history.pushState({path: newUrl}, '', newUrl);
+        if (id) {
+            renderTable(database[id]);
+        } else {
+            // No Default - shows Record Not Found
+            renderTable(null); 
         }
-
-        renderTable(database[id]);
     };
 </script>
 
